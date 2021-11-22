@@ -13,12 +13,13 @@ while not rospy.is_shutdown():
     msg.point.x = count * 10
     msg.point.y = count + 10
     msg.point.z = count / 2
-    msg.timestamp.data = count % 60 
+    msg.timestamp.data = rospy.get_rostime()
+    second = msg.timestamp.data.secs % 60 
     pub.publish(msg)
     print "published data of x: ", msg.point.x
     print "published data of y: ", msg.point.y
     print "published data of z: ", msg.point.z
-    print "published timestemp: ", msg.timestamp.data
+    print "published timestemp: ", second
     print "Pub finish"
 
     count += 1
